@@ -47,7 +47,12 @@ namespace VotingData.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return this.Json(CountDataStore.GetEnumerator());
+            List<KeyValuePair<string, int>> data = new List<KeyValuePair<string, int>>(CountDataStore.Count);
+            foreach (var kv in CountDataStore)
+            {
+                data.Add(kv);
+            }
+            return this.Json(data);
         }
 
         // PUT api/VoteData/name
